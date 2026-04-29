@@ -1,0 +1,67 @@
+import { HijaiyahLetter, HijaiyahGameLevel } from "@/types";
+
+export const hijaiyahLetters: HijaiyahLetter[] = [
+  { id: "alif",     arabic: "ا", latin: "Alif",  order: 1  },
+  { id: "ba",       arabic: "ب", latin: "Ba",    order: 2  },
+  { id: "ta",       arabic: "ت", latin: "Ta",    order: 3  },
+  { id: "tsa",      arabic: "ث", latin: "Tsa",   order: 4  },
+  { id: "jim",      arabic: "ج", latin: "Jim",   order: 5  },
+  { id: "ha",       arabic: "ح", latin: "Ha",    order: 6  },
+  { id: "kho",      arabic: "خ", latin: "Kho",   order: 7  },
+  { id: "dal",      arabic: "د", latin: "Dal",   order: 8  },
+  { id: "dzal",     arabic: "ذ", latin: "Dzal",  order: 9  },
+  { id: "ra",       arabic: "ر", latin: "Ra",    order: 10 },
+  { id: "zai",      arabic: "ز", latin: "Zai",   order: 11 },
+  { id: "sin",      arabic: "س", latin: "Sin",   order: 12 },
+  { id: "syin",     arabic: "ش", latin: "Syin",  order: 13 },
+  { id: "shod",     arabic: "ص", latin: "Shod",  order: 14 },
+  { id: "dhod",     arabic: "ض", latin: "Dhod",  order: 15 },
+  { id: "tho",      arabic: "ط", latin: "Tho",   order: 16 },
+  { id: "zho",      arabic: "ظ", latin: "Zho",   order: 17 },
+  { id: "ain",      arabic: "ع", latin: "Ain",   order: 18 },
+  { id: "ghain",    arabic: "غ", latin: "Ghain", order: 19 },
+  { id: "fa",       arabic: "ف", latin: "Fa",    order: 20 },
+  { id: "qof",      arabic: "ق", latin: "Qof",   order: 21 },
+  { id: "kaf",      arabic: "ك", latin: "Kaf",   order: 22 },
+  { id: "lam",      arabic: "ل", latin: "Lam",   order: 23 },
+  { id: "mim",      arabic: "م", latin: "Mim",   order: 24 },
+  { id: "nun",      arabic: "ن", latin: "Nun",   order: 25 },
+  { id: "waw",      arabic: "و", latin: "Waw",   order: 26 },
+  { id: "ha2",      arabic: "ه", latin: "Ha",    order: 27 },
+  { id: "lam-alif", arabic: "لا", latin: "Lam Alif", order: 28 },
+  { id: "hamzah",   arabic: "ء", latin: "Hamzah", order: 29 },
+  { id: "ya",       arabic: "ي", latin: "Ya",    order: 30 },
+];
+
+export const hijaiyahLevels: HijaiyahGameLevel[] = [
+  {
+    id: 1,
+    title: "Level 1 — Alif s/d Jim",
+    description: "Kenali 5 huruf pertama",
+    letters: hijaiyahLetters.slice(0, 5),
+  },
+  {
+    id: 2,
+    title: "Level 2 — Ha s/d Dal",
+    description: "Lanjut 5 huruf berikutnya",
+    letters: hijaiyahLetters.slice(5, 10),
+  },
+  {
+    id: 3,
+    title: "Level 3 — Dzal s/d Syin",
+    description: "Terus semangat!",
+    letters: hijaiyahLetters.slice(9, 14),
+  },
+  {
+    id: 4,
+    title: "Level 4 — Shod s/d Ain",
+    description: "Hampir setengah!",
+    letters: hijaiyahLetters.slice(13, 18),
+  },
+  {
+    id: 5,
+    title: "Level 5 — Ghain s/d Ya",
+    description: "Selesaikan semuanya!",
+    letters: hijaiyahLetters.slice(18, 23),
+  },
+];

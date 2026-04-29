@@ -1,0 +1,7 @@
+cat > public/robots.txt << 'EOF'
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://tumbuhsunnah.com/sitemap.xml
+EOF
