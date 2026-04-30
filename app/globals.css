@@ -23,6 +23,14 @@
   --color-olive-600: #5E7A48;
   --color-olive-700: #456035;
 
+  --color-sage-50: #F5F7F2;
+  --color-sage-100: #E8EDE2;
+  --color-sage-200: #D1DBC5;
+  --color-sage-300: #B5C4A5;
+  --color-sage-400: #96AA82;
+  --color-sage-500: #7A9167;
+  --color-sage-600: #5F734F;
+
   --color-warm-brown: #8B6F47;
   --color-warm-brown-light: #C4956A;
   --color-warm-brown-dark: #5C4033;
@@ -30,6 +38,8 @@
 
   /* --- Shadow --- */
   --shadow-soft: 0 2px 15px -3px rgba(139,111,71,0.07), 0 10px 20px -2px rgba(139,111,71,0.04);
+  --shadow-soft-md: 0 4px 20px -4px rgba(139,111,71,0.1), 0 12px 28px -4px rgba(139,111,71,0.06);
+  --shadow-soft-lg: 0 6px 30px -6px rgba(139,111,71,0.12), 0 16px 36px -6px rgba(139,111,71,0.08);
   --shadow-card: 0 1px 3px rgba(139,111,71,0.05), 0 8px 24px rgba(139,111,71,0.06);
 
   /* --- Animasi --- */
@@ -46,15 +56,104 @@
     50% { opacity: 1; }
   }
 }
-/* ── Add to globals.css ── */
 
-/* Smooth scroll anchor links */
+/* ══════════════════════════════════════════════════
+   GLOBAL BASE STYLES
+   ══════════════════════════════════════════════════ */
+
+/* Smooth scroll */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
 }
 
-/* Page transition helper */
+/* ══════════════════════════════════════════════════
+   PWA & MOBILE FIX — PENTING!
+   ══════════════════════════════════════════════════ */
+
+/* Disable pull-to-refresh & overscroll bounce */
+html, body {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+  -webkit-overflow-scrolling: auto;
+}
+
+/* Disable zoom on double tap — semua element */
+* {
+  touch-action: manipulation;
+}
+
+/* Disable text selection & callout saat drag */
+.select-none,
+[style*="touch-action: none"] * {
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Game area — BLOCK semua scroll & gesture */
+[style*="touch-action: none"] {
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+/* Draggable items — block semua default touch */
+[style*="touch-action: none"] [draggable="true"],
+.touch-none {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Ghost drag — pastikan paling atas */
+.fixed.pointer-events-none {
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* PWA standalone mode — safe area */
+@media (display-mode: standalone) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Safe area for notch */
+@supports (padding: env(safe-area-inset-bottom)) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Better tap targets */
+button, a, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent iOS rubber band effect di game area */
+.game-area {
+  position: relative;
+  overflow: hidden;
+  touch-action: none;
+  -webkit-overflow-scrolling: auto;
+  overscroll-behavior: contain;
+}
+
+/* ══════════════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════════════ */
+
+/* Page transition */
 .page-enter {
   animation: pageEnter 0.3s ease-out;
 }
@@ -80,7 +179,7 @@ html {
   animation: glow-green 0.8s ease-in-out;
 }
 
-/* Subtle shake for wrong answers */
+/* Shake for wrong answers */
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
   25%      { transform: translateX(-4px); }
@@ -90,6 +189,29 @@ html {
 
 .shake {
   animation: shake 0.4s ease-in-out;
+}
+
+/* Bounce in — untuk feedback benar */
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.1); }
+  70% { transform: scale(0.95); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.bounce-in {
+  animation: bounceIn 0.5s ease-out;
+}
+
+/* Pop — untuk bintang */
+@keyframes pop {
+  0% { transform: scale(0); }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.pop {
+  animation: pop 0.3s ease-out;
 }
 
 /* Stagger animation for lists */
@@ -105,6 +227,10 @@ html {
 .stagger-item:nth-child(4) { animation-delay: 0.20s; }
 .stagger-item:nth-child(5) { animation-delay: 0.25s; }
 .stagger-item:nth-child(6) { animation-delay: 0.30s; }
+.stagger-item:nth-child(7) { animation-delay: 0.35s; }
+.stagger-item:nth-child(8) { animation-delay: 0.40s; }
+.stagger-item:nth-child(9) { animation-delay: 0.45s; }
+.stagger-item:nth-child(10) { animation-delay: 0.50s; }
 
 @keyframes staggerIn {
   to {
@@ -113,24 +239,42 @@ html {
   }
 }
 
-/* Safe area for mobile notch */
-@supports (padding: env(safe-area-inset-bottom)) {
-  body {
-    padding-bottom: env(safe-area-inset-bottom);
-  }
+/* Drag hover highlight */
+@keyframes dropZoneGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(122, 154, 97, 0); }
+  50%      { box-shadow: 0 0 0 4px rgba(122, 154, 97, 0.3); }
 }
 
-/* Prevent overscroll bounce on iOS */
-body {
-  overscroll-behavior-y: none;
+.drop-zone-active {
+  animation: dropZoneGlow 1s ease-in-out infinite;
 }
 
-/* Better tap targets for mobile */
-button, a, [role="button"] {
-  touch-action: manipulation;
+/* ══════════════════════════════════════════════════
+   SCROLLBAR CUSTOM (Desktop)
+   ══════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Reduce motion for users who prefer it */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 111, 71, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 111, 71, 0.3);
+}
+
+/* ══════════════════════════════════════════════════
+   ACCESSIBILITY
+   ══════════════════════════════════════════════════ */
+
+/* Reduce motion */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -142,7 +286,17 @@ button, a, [role="button"] {
   }
 }
 
-/* Print styles */
+/* Focus visible — keyboard navigation */
+:focus-visible {
+  outline: 2px solid #7A9A61;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ══════════════════════════════════════════════════
+   PRINT
+   ══════════════════════════════════════════════════ */
+
 @media print {
   .no-print {
     display: none !important;
